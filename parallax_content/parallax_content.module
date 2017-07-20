@@ -1,0 +1,69 @@
+<?php
+
+/******
+Content  Type descriptive information
+Create Parallax Content type
+
+****/
+
+
+function parallax_content_node_info() {
+	$t = get_t();
+		return array(
+			'parallax_content' => array(
+				'name' => $t('Parallax Content'),
+				'base' => 'parallax_content',
+				'description' => $t('Create Parallax Content'),
+				'has_title' => TRUE,
+				'title_label' => $t('Parallax title') // title field for node
+			 )
+		);
+	}
+	
+	
+
+
+function parallax_content_form($node, $form_state) {
+    		return node_content_form($node, $form_state);
+		}
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path 
+ *   Which path of the site we're using to display help
+ * @param arg 
+ *   Array that holds the current path as returned from arg() function
+ */
+ 
+ function parallax_content_help($path, $arg) {
+	 	$t = get_t();
+
+  switch ($path) {
+    case "admin/help#parallax_content":
+      return $t("Displays and creates Parallax content"); 
+      break; 
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+ 
+
+function parallax_content_menu() {
+  $items = array();
+
+  $items['admin/config/content/parallax_content'] = array(
+    'title' => 'Parallax Content configuration',
+    'description' => 'Configuration for Current posts module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('current_posts_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+?>

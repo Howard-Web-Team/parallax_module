@@ -1,0 +1,8 @@
+name = Parallax Content
+description = Allows users to create parallax content.
+package = Core
+core = 7.x
+files[] = parallax_content.install
+files[] = parallax_content.module
+configure = admin/config/content/parallax_content
+

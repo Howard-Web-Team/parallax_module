@@ -1,0 +1,105 @@
+<?php
+
+function _parallax_content_fields(){
+		$t = get_t();
+
+	$field = array(
+		'field_background' =>	array(
+			  'field_name' => 'field_new_background',
+			  'type' => 'image',
+			  'cardinality' => 1, 
+			),
+			
+		'field_foreground' =>	array(
+			  'field_name' => 'field_new_foreground',
+			  'type' => 'image',
+			  'cardinality' => 1, 
+			),
+			
+			'field_effects' =>	array(
+			  'field_name' => 'field_new_effects',
+			  'type' => 'list_text',
+			  'options' => array($t('--- SELECT ---'), $t('Effect 1'), $t('Effect 2'), $t('Effect 3')),
+			  'settings' => array('allowed_values' => array(), 'allowed_values_function' => ''),
+			  'cardinality' => 1, 
+			),
+	);
+	
+	return $field;
+
+}
+
+function _parallax_content_instances(){
+	$t = get_t();
+
+	$instance = array(
+		'instance_background' =>array(
+		  'field_name' => 'field_new_background',
+		  'entity_type' => 'node',
+		  'bundle' => 'parallax_content',
+		  'label' => $t('Background Images'),
+		  'description' => $t('Enter background image.'),
+		  'widget' => array(
+			'type' => 'image_image',
+			'weight' => 0,
+		  ),
+		),
+		'instance_foreground' =>array(
+		  'field_name' => 'field_new_foreground',
+		  'entity_type' => 'node',
+		  'bundle' => 'parallax_content',
+		  'label' => $t('Foreground Image'),
+		  'description' => $t('Enter foreground image.'),
+		  'widget' => array(
+			'type' => 'image_image',
+			'weight' => 1,
+		  ),
+		),
+		
+		'instance_effects' =>array(
+		  'field_name' => 'field_new_effects',
+		  'entity_type' => 'node',
+		  'bundle' => 'parallax_content',
+		  'label' => $t('Parallax Effects'),
+		  'description' => $t('Parallax Effects'),
+		  'widget' => array(
+			'type' => 'options_select',
+			'weight' => 2,
+		  ),
+		),
+	);
+	
+	return $instance;
+
+}
+
+function parallax_content_enable(){
+
+	foreach (_parallax_content_fields() as $fields) {
+        field_create_field($fields);
+    }
+		
+	foreach (_parallax_content_instances() as $instances) {
+		field_create_instance($instances);
+    }
+		
+}
+		
+
+function parallax_content_disable(){
+		
+	foreach (_parallax_content_fields() as $fields) {
+        field_delete_field($fields);
+    }
+		
+	foreach (_parallax_content_instances() as $instances) {
+		field_delete_instance($instances);
+    }
+}
+	
+	
+	
+	
+
+
+?>
